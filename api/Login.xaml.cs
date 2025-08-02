@@ -74,6 +74,11 @@ namespace api
                         new DoctorWindow().Show();
                         this.Close();
                     }
+                    else if (AppData.CurrentUser.role.name == "STAFF_ROLE")
+                    {
+                        new StaffWindow().Show();
+                        this.Close();
+                    }
                     else
                     {
                         MessageBox.Show($"Role chưa hỗ trợ: {AppData.CurrentUser.role.name}");

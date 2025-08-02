@@ -1,0 +1,49 @@
+﻿<Window x:Class="api.AppointmentListWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:api"
+        mc:Ignorable="d"
+        Title="AppointmentListWindow" Height="450" Width="800"
+        WindowStartupLocation="CenterScreen">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Danh sách lịch hẹn đã đặt" FontSize="18" FontWeight="Bold" Margin="0,0,0,10"/>
+
+        <ListBox x:Name="AppointmentListBox" Grid.Row="1" BorderBrush="Gray" BorderThickness="1">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderBrush="LightGray" BorderThickness="0 0 0 1" Padding="5">
+                        <StackPanel>
+                            <TextBlock Text="{Binding serviceID.name}" FontSize="16" FontWeight="Bold"/>
+                            <TextBlock Text="{Binding doctorID.userID.name, StringFormat='Bác sĩ: {0}'}" />
+                            <TextBlock Text="{Binding startTime, StringFormat='Thời gian bắt đầu: {0:HH:mm dd/MM/yyyy}'}"/>
+                            <TextBlock Text="{Binding status, StringFormat='Trạng thái: {0}'}" Foreground="DarkBlue"/>
+                            <Button Content="Thanh toán"
+                            Margin="0,5,0,0"
+                            HorizontalAlignment="Left"
+                            Tag="{Binding _id}"
+                            Click="PayButton_Click">
+                                <Button.Style>
+                                    <Style TargetType="Button">
+                                        <Setter Property="Visibility" Value="Collapsed" />
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding status}" Value="Chờ thanh toán">
+                                                <Setter Property="Visibility" Value="Visible" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+</Window>

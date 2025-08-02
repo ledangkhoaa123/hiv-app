@@ -12,13 +12,26 @@
         <ComboBox x:Name="DoctorComboBox" DisplayMemberPath="userID.name" SelectedValuePath="_id" Height="30" Margin="0,5"/>
 
         <TextBlock Text="Chọn dịch vụ:" Margin="0,10,0,0"/>
-        <ComboBox x:Name="ServiceComboBox" DisplayMemberPath="name" SelectedValuePath="_id" Height="30" Margin="0,5"/>
+        <ComboBox x:Name="ServiceComboBox" DisplayMemberPath="name" SelectedValuePath="_id" Height="30" Margin="0,5" SelectionChanged="ServiceComboBox_SelectionChanged"/>
 
         <TextBlock Text="Chọn ngày khám:" Margin="0,10,0,0"/>
         <DatePicker x:Name="DatePicker" SelectedDate="{x:Static sys:DateTime.Now}" Margin="0,5"/>
 
-        <Button Content="Xem lịch trống" Click="CheckSlots_Click" Margin="0,15,0,0" Height="35"/>
+        <StackPanel Orientation="Horizontal" Margin="0,15,0,0">
+            <Button Content="Xem lịch trống"
+            Click="CheckSlots_Click"
+            Width="150" Height="35" Margin="0,0,10,0"/>
+            <Button Content="Đăng ký khám"
+            Click="RegisterButton_Click"
+            Width="150" Height="35"
+                    Margin="0,0,10,0"/>
+            <Button Content="Xem lịch đã đặt"
+                    Width="150" Height="35"
+            Margin="0,0,10,0"
+            Click="ViewAppointments_Click"/>
+        </StackPanel>
 
-        <ListBox x:Name="SlotListBox" Height="150" Margin="0,10"/>
+        <ListBox x:Name="SlotListBox" Height="150" Margin="0,10" SelectionChanged="SlotListBox_SelectionChanged"/>
     </StackPanel>
+    
 </Window>

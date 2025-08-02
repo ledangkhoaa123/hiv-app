@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +24,8 @@ namespace api
     public partial class CustomerWindow : Window
     {
         private readonly HttpClient _client;
+        private string SelectedSlotId = null!;
+        private string SelectedServiceId = null!;
         public CustomerWindow()
         {
             InitializeComponent();
@@ -67,14 +70,94 @@ namespace api
                 var slotResult = JsonConvert.DeserializeObject<ApiResponse<List<DoctorSlot>>>(slotJson);
 
                 // Hiển thị dạng "09:00 - 10:00"
-                SlotListBox.ItemsSource = slotResult.data
-                    .Select(slot => $"{slot.startTime:HH:mm} - {slot.endTime:HH:mm}")
-                    .ToList();
+                SlotListBox.ItemsSource = slotResult.data;
+                SlotListBox.DisplayMemberPath = "TimeDisplay";
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Lỗi khi lấy lịch trống: " + ex.Message);
             }
+        }
+        private void SlotListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (SlotListBox.SelectedItem is DoctorSlot selectedSlot)
+            {
+                SelectedSlotId = selectedSlot._id;
+            }
+        }
+
+        private void ServiceComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (ServiceComboBox.SelectedItem is Service selectedService)
+            {
+                SelectedServiceId = selectedService._id;
+            }
+        }
+
+        private async Task<string> GetPatientIdFromTokenAsync()
+        {
+            using var client = new HttpClient();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", AppData.AccessToken);
+
+            var response = await client.PostAsync("http://localhost:3000/patients/by-token", null);
+            var json = await response.Content.ReadAsStringAsync();
+
+            if (response.IsSuccessStatusCode)
+            {
+                var result = JsonConvert.DeserializeObject<PatientByTokenResponse>(json);
+                return result.data._id;
+            }
+            else
+            {
+                MessageBox.Show($"Không lấy được thông tin bệnh nhân: {json}");
+                return null;
+            }
+        }
+        private void ViewAppointments_Click(object sender, RoutedEventArgs e)
+        {
+            var window = new AppointmentListWindow();
+            window.ShowDialog();
+        }
+        private async Task RegisterAppointmentAsync(string doctorSlotId, string serviceId)
+        {
+            var patientId = await GetPatientIdFromTokenAsync();
+            if (string.IsNullOrEmpty(patientId))
+                return;
+
+            var payload = new
+            {
+                patientID = patientId,
+                doctorSlotID = new List<string> { doctorSlotId },
+                serviceID = serviceId
+            };
+
+            using var client = new HttpClient();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", AppData.AccessToken);
+
+            var content = new StringContent(JsonConvert.SerializeObject(payload), Encoding.UTF8, "application/json");
+
+            var response = await client.PostAsync("http://localhost:3000/appointments", content);
+            var responseText = await response.Content.ReadAsStringAsync();
+
+            if (response.IsSuccessStatusCode)
+            {
+                
+                MessageBox.Show("Đăng ký lịch khám thành công!");
+            }
+            else
+            {
+                MessageBox.Show($"Đăng ký thất bại:\n{responseText}");
+            }
+        }
+        private async void RegisterButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(SelectedSlotId) || string.IsNullOrEmpty(SelectedServiceId))
+            {
+                MessageBox.Show("Vui lòng chọn slot và dịch vụ.");
+                return;
+            }
+
+            await RegisterAppointmentAsync(SelectedSlotId, SelectedServiceId);
         }
     }
     public class ApiResponse<T>
@@ -109,5 +192,20 @@ namespace api
         public DateTime startTime { get; set; }
         public DateTime endTime { get; set; }
         public string status { get; set; }
+        public string TimeDisplay => $"{startTime:HH:mm} - {endTime:HH:mm}";
+    }
+    public class PatientByTokenResponse
+    {
+        public int statusCode { get; set; }
+        public string message { get; set; }
+        public Patient data { get; set; }
+    }
+
+    public class Patient
+    {
+        public string _id { get; set; }
+        public string name { get; set; }
+        public List<string> medicalRecordID { get; set; }
+        public string userID { get; set; }
     }
 }
