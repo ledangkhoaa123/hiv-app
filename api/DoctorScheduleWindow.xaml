@@ -5,37 +5,126 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:api"
         mc:Ignorable="d"
-        Title="DoctorScheduleWindow" Height="450" Width="800">
-    <Grid Margin="10">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
+        Title="Lịch làm việc bác sĩ"
+        Height="550"
+        Width="850"
+        WindowStartupLocation="CenterScreen"
+        Background="#F0FAFF">
 
-        <!-- Header and date navigation -->
-        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10">
-            <Button Content="← Tuần trước" Width="100" Margin="5" Click="PreviousWeek_Click"/>
-            <TextBlock x:Name="WeekLabel" VerticalAlignment="Center" FontWeight="Bold" FontSize="16"/>
-            <Button Content="Tuần sau →" Width="100" Margin="5" Click="NextWeek_Click"/>
-        </StackPanel>
+    <Border Background="White"
+            BorderBrush="#CCE7FF"
+            BorderThickness="1"
+            CornerRadius="10"
+            Margin="20"
+            Padding="20">
 
-        <!-- List of schedules -->
-        <ListBox x:Name="ScheduleList" Grid.Row="1" Margin="0,0,0,10" SelectionChanged="ScheduleList_SelectionChanged"/>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
 
-        <!-- Shift selection and confirm -->
-        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,5">
-            <TextBlock Text="Ca: " VerticalAlignment="Center"/>
-            <ComboBox x:Name="ShiftComboBox" Width="120" Margin="5" SelectedIndex="0">
-                <ComboBoxItem Content="morning"/>
-                <ComboBoxItem Content="afternoon"/>
-                <ComboBoxItem Content="full"/>
-            </ComboBox>
-            <Button x:Name="ConfirmButton" Content="Xác nhận lịch" Width="150" Click="ConfirmButton_Click" IsEnabled="False"/>
-        </StackPanel>
+            <!-- Tiêu đề + điều hướng tuần -->
+            <StackPanel Grid.Row="0"
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Center"
+                        Margin="0,0,0,20">
+                <Button Content="← Tuần trước"
+                        Width="120"
+                        Height="35"
+                        Margin="5"
+                        Click="PreviousWeek_Click"
+                        Background="#007ACC"
+                        Foreground="White"
+                        BorderThickness="0"
+                        Cursor="Hand"/>
 
-        <!-- Status -->
-        <TextBlock x:Name="StatusText" Grid.Row="3" Foreground="DarkGreen" FontStyle="Italic" Margin="0,10,0,0"/>
-    </Grid>
+                <TextBlock x:Name="WeekLabel"
+                           FontSize="18"
+                           FontWeight="Bold"
+                           Foreground="#007ACC"
+                           VerticalAlignment="Center"
+                           Margin="10,0"/>
+
+                <Button Content="Tuần sau →"
+                        Width="120"
+                        Height="35"
+                        Margin="5"
+                        Click="NextWeek_Click"
+                        Background="#007ACC"
+                        Foreground="White"
+                        BorderThickness="0"
+                        Cursor="Hand"/>
+            </StackPanel>
+
+            <!-- Danh sách lịch làm việc -->
+            <ListBox x:Name="ScheduleList"
+                     Grid.Row="1"
+                     Margin="0,0,0,10"
+                     BorderBrush="#CCE7FF"
+                     BorderThickness="1"
+                     FontSize="14"
+                     Background="White"
+                     SelectionChanged="ScheduleList_SelectionChanged">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="Padding" Value="10"/>
+                        <Setter Property="Margin" Value="0,0,0,5"/>
+                        <Setter Property="Background" Value="#F9FCFF"/>
+                        <Setter Property="BorderBrush" Value="#E0E0E0"/>
+                        <Setter Property="BorderThickness" Value="0 0 0 1"/>
+                        <Setter Property="FontFamily" Value="Segoe UI"/>
+                        <Setter Property="Foreground" Value="#333"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="#D0ECFF"/>
+                                <Setter Property="FontWeight" Value="Bold"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+            </ListBox>
+
+            <!-- Chọn ca và nút xác nhận -->
+            <StackPanel Grid.Row="2"
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Right"
+                        Margin="0,10,0,10">
+                <TextBlock Text="Ca:" VerticalAlignment="Center" FontWeight="SemiBold" Margin="0,0,5,0"/>
+                <ComboBox x:Name="ShiftComboBox"
+                          Width="130"
+                          Height="30"
+                          Margin="5"
+                          SelectedIndex="0"
+                          Background="White"
+                          BorderBrush="#66B2FF">
+                    <ComboBoxItem Content="morning"/>
+                    <ComboBoxItem Content="afternoon"/>
+                    <ComboBoxItem Content="full"/>
+                </ComboBox>
+                <Button x:Name="ConfirmButton"
+                        Content="Xác nhận lịch"
+                        Width="150"
+                        Height="35"
+                        Margin="10,0,0,0"
+                        IsEnabled="False"
+                        Background="#28A745"
+                        Foreground="White"
+                        FontWeight="Bold"
+                        BorderThickness="0"
+                        Cursor="Hand"
+                        Click="ConfirmButton_Click"/>
+            </StackPanel>
+
+            <!-- Trạng thái -->
+            <TextBlock x:Name="StatusText"
+                       Grid.Row="3"
+                       Foreground="DarkGreen"
+                       FontStyle="Italic"
+                       FontSize="13"
+                       Margin="0,0,0,5"/>
+        </Grid>
+    </Border>
 </Window>

@@ -6,32 +6,91 @@
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:api"
         mc:Ignorable="d"
-        Title="CustomerWindow" Height="450" Width="800">
-    <StackPanel Margin="20">
-        <TextBlock Text="Chọn bác sĩ:"/>
-        <ComboBox x:Name="DoctorComboBox" DisplayMemberPath="userID.name" SelectedValuePath="_id" Height="30" Margin="0,5"/>
+        Title="Đăng ký khám bệnh"
+        Height="550"
+        Width="800"
+        WindowStartupLocation="CenterScreen"
+        Background="#F0FAFF">
 
-        <TextBlock Text="Chọn dịch vụ:" Margin="0,10,0,0"/>
-        <ComboBox x:Name="ServiceComboBox" DisplayMemberPath="name" SelectedValuePath="_id" Height="30" Margin="0,5" SelectionChanged="ServiceComboBox_SelectionChanged"/>
+    <Border CornerRadius="10" Padding="20" Background="White" Margin="20" BorderBrush="#CCE7FF" BorderThickness="1">
+        <StackPanel>
 
-        <TextBlock Text="Chọn ngày khám:" Margin="0,10,0,0"/>
-        <DatePicker x:Name="DatePicker" SelectedDate="{x:Static sys:DateTime.Now}" Margin="0,5"/>
+            <TextBlock Text="Đăng ký lịch khám bệnh" 
+                       FontSize="22" 
+                       FontWeight="Bold" 
+                       Foreground="#007ACC" 
+                       HorizontalAlignment="Center" 
+                       Margin="0,0,0,20"/>
 
-        <StackPanel Orientation="Horizontal" Margin="0,15,0,0">
-            <Button Content="Xem lịch trống"
-            Click="CheckSlots_Click"
-            Width="150" Height="35" Margin="0,0,10,0"/>
-            <Button Content="Đăng ký khám"
-            Click="RegisterButton_Click"
-            Width="150" Height="35"
-                    Margin="0,0,10,0"/>
-            <Button Content="Xem lịch đã đặt"
-                    Width="150" Height="35"
-            Margin="0,0,10,0"
-            Click="ViewAppointments_Click"/>
+            <!-- Bác sĩ -->
+            <TextBlock Text="Chọn bác sĩ:" FontWeight="SemiBold" Foreground="#333"/>
+            <ComboBox x:Name="DoctorComboBox"
+                      DisplayMemberPath="userID.name"
+                      SelectedValuePath="_id"
+                      Height="35"
+                      Margin="0,5,0,15"
+                      Background="White"
+                      BorderBrush="#66B2FF"/>
+
+            <!-- Dịch vụ -->
+            <TextBlock Text="Chọn dịch vụ:" FontWeight="SemiBold" Foreground="#333"/>
+            <ComboBox x:Name="ServiceComboBox"
+                      DisplayMemberPath="name"
+                      SelectedValuePath="_id"
+                      Height="35"
+                      Margin="0,5,0,15"
+                      Background="White"
+                      BorderBrush="#66B2FF"
+                      SelectionChanged="ServiceComboBox_SelectionChanged"/>
+
+            <!-- Ngày khám -->
+            <TextBlock Text="Chọn ngày khám:" FontWeight="SemiBold" Foreground="#333"/>
+            <DatePicker x:Name="DatePicker"
+                        SelectedDate="{x:Static sys:DateTime.Now}"
+                        Height="35"
+                        Margin="0,5,0,15"
+                        BorderBrush="#66B2FF"
+                        Background="White"/>
+
+            <!-- Nút chức năng -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,20">
+                <Button Content="Xem lịch trống"
+                        Click="CheckSlots_Click"
+                        Width="150"
+                        Height="40"
+                        Background="#0099FF"
+                        Foreground="White"
+                        Margin="0,0,10,0"
+                        FontWeight="SemiBold"
+                        Cursor="Hand"/>
+
+                <Button Content="Đăng ký khám"
+                        Click="RegisterButton_Click"
+                        Width="150"
+                        Height="40"
+                        Background="#28A745"
+                        Foreground="White"
+                        Margin="0,0,10,0"
+                        FontWeight="SemiBold"
+                        Cursor="Hand"/>
+
+                <Button Content="Xem lịch đã đặt"
+                        Click="ViewAppointments_Click"
+                        Width="150"
+                        Height="40"
+                        Background="#17A2B8"
+                        Foreground="White"
+                        FontWeight="SemiBold"
+                        Cursor="Hand"/>
+            </StackPanel>
+
+            <!-- Danh sách slot -->
+            <TextBlock Text="Danh sách slot trống:" FontWeight="SemiBold" Foreground="#333"/>
+            <ListBox x:Name="SlotListBox"
+                     Height="150"
+                     Margin="0,5"
+                     BorderBrush="#CCE7FF"
+                     SelectionChanged="SlotListBox_SelectionChanged"/>
         </StackPanel>
-
-        <ListBox x:Name="SlotListBox" Height="150" Margin="0,10" SelectionChanged="SlotListBox_SelectionChanged"/>
-    </StackPanel>
-    
+    </Border>
 </Window>

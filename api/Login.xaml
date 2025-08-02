@@ -5,34 +5,85 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:api"
         mc:Ignorable="d"
-        Title="Login" Height="450" Width="800" WindowStartupLocation="CenterScreen">
-    <Grid Margin="20">
+        Title="Login"
+        Height="450"
+        Width="800"
+        WindowStartupLocation="CenterScreen"
+        Background="#F0FAFF">
+
+    <Grid Margin="40">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
+            <!-- Title -->
+            <RowDefinition Height="30"/>
+            <!-- Spacer -->
             <RowDefinition Height="Auto"/>
+            <!-- Email label -->
             <RowDefinition Height="Auto"/>
+            <!-- Email box -->
             <RowDefinition Height="Auto"/>
+            <!-- Password label -->
+            <RowDefinition Height="Auto"/>
+            <!-- Password box -->
+            <RowDefinition Height="Auto"/>
+            <!-- Login button -->
             <RowDefinition Height="*"/>
+            <!-- Spacer -->
         </Grid.RowDefinitions>
 
+        <!-- System Title -->
+        <TextBlock Grid.Row="0"
+                   Text="HIV Treatment &amp; Medical Service"
+                   FontSize="26"
+                   FontWeight="Bold"
+                   Foreground="#0066CC"
+                   HorizontalAlignment="Center"
+                   Margin="0,20,0,0"/>
+
         <!-- Email Label -->
-        <Label Grid.Row="0" Content="Email:"/>
+        <Label Grid.Row="2"
+               Content="Email:"
+               FontWeight="SemiBold"
+               Foreground="#333"
+               Margin="0,10,0,0"/>
+
         <TextBox x:Name="EmailBox"
-                 Grid.Row="1"
-                 Height="30"
+                 Grid.Row="3"
+                 Height="35"
+                 Background="White"
+                 BorderBrush="#66B2FF"
+                 BorderThickness="1"
+                 Padding="5"
                  Margin="0,0,0,10"/>
 
         <!-- Password Label -->
-        <Label Grid.Row="2" Content="Password:"/>
+        <Label Grid.Row="4"
+               Content="Password:"
+               FontWeight="SemiBold"
+               Foreground="#333"
+               Margin="0,10,0,0"/>
+
         <PasswordBox x:Name="PasswordBox"
-                     Grid.Row="3"
-                     Height="30"
+                     Grid.Row="5"
+                     Height="35"
+                     Background="White"
+                     BorderBrush="#66B2FF"
+                     BorderThickness="1"
+                     Padding="5"
                      Margin="0,0,0,10"/>
 
         <!-- Login Button -->
-        <Button Grid.Row="4"
+        <Button Grid.Row="6"
                 Content="Login"
-                Height="35"
-                Click="Login_Click"/>
+                Height="40"
+                Width="120"
+                Background="#0099FF"
+                Foreground="White"
+                FontWeight="Bold"
+                BorderBrush="#007ACC"
+                HorizontalAlignment="Center"
+                Cursor="Hand"
+                Click="Login_Click"
+                Margin="0,20,0,0"/>
     </Grid>
 </Window>

@@ -5,37 +5,92 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:api"
         mc:Ignorable="d"
-        Title="StaffAppointmentWindow" Height="450" Width="800">
-    <Grid Margin="10">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+        Title="Duyệt lịch hẹn khám"
+        Height="550"
+        Width="900"
+        WindowStartupLocation="CenterScreen"
+        Background="#F0FAFF">
 
-        <!-- Nút Tải lại -->
-        <StackPanel Orientation="Horizontal" Grid.Row="0" HorizontalAlignment="Right" Margin="0,0,0,10">
-            <Button Content="Tải lại" Width="100" Click="ReloadButton_Click"/>
-        </StackPanel>
+    <Border CornerRadius="10" Padding="20" Background="White" Margin="20" BorderBrush="#CCE7FF" BorderThickness="1">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
-        <!-- Bảng dữ liệu -->
-        <DataGrid x:Name="AppointmentDataGrid" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Bệnh nhân" Binding="{Binding PatientName}" Width="*" />
-                <DataGridTextColumn Header="Bác sĩ" Binding="{Binding DoctorName}" Width="*" />
-                <DataGridTextColumn Header="Dịch vụ" Binding="{Binding ServiceName}" Width="*" />
-                <DataGridTextColumn Header="Thời gian" Binding="{Binding Time}" Width="*" />
-                <DataGridTextColumn Header="Trạng thái" Binding="{Binding Status}" Width="*" />
-                <DataGridTemplateColumn Header="Hành động" Width="150">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                <Button Content="Duyệt" Margin="2" Padding="4,2" Click="ApproveButton_Click" Tag="{Binding AppointmentId}" />
-                                <Button Content="Từ chối" Margin="2" Padding="4,2" Click="RejectButton_Click" Tag="{Binding AppointmentId}" />
-                            </StackPanel>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-            </DataGrid.Columns>
-        </DataGrid>
-    </Grid>
+            <!-- Tiêu đề -->
+            <TextBlock Text="Danh sách lịch hẹn chờ xử lý"
+                       FontSize="22"
+                       FontWeight="Bold"
+                       Foreground="#007ACC"
+                       Margin="0,0,0,10"
+                       HorizontalAlignment="Center"
+                       Grid.Row="0"/>
+
+            <!-- Nút tải lại -->
+            <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Right" Margin="0,0,0,10">
+                <Button Content="Tải lại"
+                        Width="100"
+                        Background="#007BFF"
+                        Foreground="White"
+                        FontWeight="SemiBold"
+                        BorderThickness="0"
+                        Cursor="Hand"
+                        Click="ReloadButton_Click"/>
+            </StackPanel>
+
+            <!-- Bảng dữ liệu -->
+            <DataGrid x:Name="AppointmentDataGrid"
+                      Grid.Row="2"
+                      AutoGenerateColumns="False"
+                      IsReadOnly="True"
+                      HeadersVisibility="Column"
+                      AlternatingRowBackground="#F8FBFF"
+                      GridLinesVisibility="Horizontal"
+                      BorderBrush="#CCE7FF"
+                      RowBackground="White"
+                      VerticalGridLinesBrush="#E0E0E0"
+                      HorizontalGridLinesBrush="#E0E0E0"
+                      FontSize="14"
+                      Padding="5">
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Bệnh nhân" Binding="{Binding PatientName}" Width="*" />
+                    <DataGridTextColumn Header="Bác sĩ" Binding="{Binding DoctorName}" Width="*" />
+                    <DataGridTextColumn Header="Dịch vụ" Binding="{Binding ServiceName}" Width="*" />
+                    <DataGridTextColumn Header="Thời gian" Binding="{Binding Time}" Width="*" />
+                    <DataGridTextColumn Header="Trạng thái" Binding="{Binding Status}" Width="*" />
+
+                    <DataGridTemplateColumn Header="Hành động" Width="160">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                    <Button Content="Duyệt"
+                                            Margin="2"
+                                            Padding="8,2"
+                                            Background="#28A745"
+                                            Foreground="White"
+                                            FontWeight="SemiBold"
+                                            Cursor="Hand"
+                                            Click="ApproveButton_Click"
+                                            Tag="{Binding AppointmentId}"/>
+
+                                    <Button Content="Từ chối"
+                                            Margin="2"
+                                            Padding="8,2"
+                                            Background="#DC3545"
+                                            Foreground="White"
+                                            FontWeight="SemiBold"
+                                            Cursor="Hand"
+                                            Click="RejectButton_Click"
+                                            Tag="{Binding AppointmentId}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </Border>
 </Window>

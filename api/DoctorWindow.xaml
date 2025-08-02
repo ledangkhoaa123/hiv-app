@@ -5,38 +5,62 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:api"
         mc:Ignorable="d"
-        Title="DoctorWindow" Height="450" Width="800">
-    <Grid Margin="20">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
+        Title="Thông tin bác sĩ"
+        Height="550"
+        Width="850"
+        WindowStartupLocation="CenterScreen"
+        Background="#F0FAFF">
 
-        <!-- Avatar -->
-        <Image x:Name="AvatarImage" Width="180" Height="180" Grid.Row="0" Grid.Column="0" Margin="0,0,10,10" />
+    <Border CornerRadius="10" Background="White" Padding="20" Margin="20" BorderBrush="#CCE7FF" BorderThickness="1">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
 
-        <!-- Doctor info -->
-        <StackPanel Grid.Row="0" Grid.Column="1" Margin="10,0">
-            <TextBlock x:Name="NameText" FontSize="18" FontWeight="Bold"/>
-            <TextBlock x:Name="EmailText"/>
-            <TextBlock x:Name="PhoneText"/>
-            <TextBlock x:Name="RoomText"/>
-            <TextBlock x:Name="SpecializationText"/>
-            <TextBlock x:Name="DegreeText"/>
-            <TextBlock Text="Kinh nghiệm:" FontWeight="Bold" Margin="0,10,0,0"/>
-            <ItemsControl x:Name="ExperienceList" />
-        </StackPanel>
+            <!-- Ảnh đại diện -->
+            <StackPanel Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center">
+                <Border BorderBrush="#007ACC" BorderThickness="2" CornerRadius="90" Width="180" Height="180">
+                    <Image x:Name="AvatarImage"
+                           Stretch="UniformToFill"
+                           ClipToBounds="True"
+                           Width="180"
+                           Height="180"/>
+                </Border>
+            </StackPanel>
 
-        <!-- Button -->
-        <Button Content="Xem lịch làm việc"
-                Width="150" Height="40"
-                Grid.Row="2" Grid.ColumnSpan="2"
-                HorizontalAlignment="Center" Margin="0,20,0,0"
-                Click="CreateSchedule_Click"/>
-    </Grid>
+            <!-- Thông tin bác sĩ -->
+            <StackPanel Grid.Row="0" Grid.Column="1" Margin="20,0">
+                <TextBlock Text="Thông tin bác sĩ" FontSize="22" FontWeight="Bold" Foreground="#007ACC" Margin="0,0,0,20"/>
+                <TextBlock x:Name="NameText" FontSize="18" FontWeight="Bold" Foreground="#333"/>
+                <TextBlock x:Name="EmailText" Foreground="#555"/>
+                <TextBlock x:Name="PhoneText" Foreground="#555"/>
+                <TextBlock x:Name="RoomText" Foreground="#555"/>
+                <TextBlock x:Name="SpecializationText" Foreground="#555"/>
+                <TextBlock x:Name="DegreeText" Foreground="#555"/>
+
+                <TextBlock Text="Kinh nghiệm:" FontWeight="Bold" Margin="0,15,0,5"/>
+                <ItemsControl x:Name="ExperienceList"/>
+            </StackPanel>
+
+            <!-- Nút xem lịch -->
+            <Button Content="Xem lịch làm việc"
+                    Width="180"
+                    Height="40"
+                    Background="#007BFF"
+                    Foreground="White"
+                    FontWeight="SemiBold"
+                    BorderThickness="0"
+                    Cursor="Hand"
+                    Grid.Row="2" Grid.ColumnSpan="2"
+                    HorizontalAlignment="Center"
+                    Margin="0,20,0,0"
+                    Click="CreateSchedule_Click"/>
+        </Grid>
+    </Border>
 </Window>

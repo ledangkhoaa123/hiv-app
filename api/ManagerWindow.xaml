@@ -5,15 +5,61 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:api"
         mc:Ignorable="d"
-        Title="ManagerWindow" Height="450" Width="800"
-         WindowStartupLocation="CenterScreen">
-    <StackPanel Margin="20">
-        <TextBlock Text="Chọn bác sĩ:"/>
-        <ComboBox x:Name="DoctorComboBox" DisplayMemberPath="userID.name" SelectedValuePath="_id" Height="30" Margin="0,5"/>
+        Title="Tạo lịch khám bác sĩ"
+        Height="450"
+        Width="800"
+        WindowStartupLocation="CenterScreen"
+        Background="#F0FAFF">
 
-        <TextBlock Text="Chọn ngày khám:" Margin="10,10,0,0"/>
-        <DatePicker x:Name="DatePicker" Margin="0,5"/>
+    <Border CornerRadius="10"
+            Background="White"
+            Padding="20"
+            Margin="20"
+            BorderBrush="#CCE7FF"
+            BorderThickness="1">
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="400">
 
-        <Button Content="Tạo lịch khám" Click="CreateSchedule_Click" Margin="0,15,0,0" Height="35"/>
-    </StackPanel>
+            <!-- Tiêu đề -->
+            <TextBlock Text="Tạo lịch khám cho bác sĩ"
+                       FontSize="22"
+                       FontWeight="Bold"
+                       Foreground="#007ACC"
+                       HorizontalAlignment="Center"
+                       Margin="0,0,0,30"/>
+
+            <!-- Chọn bác sĩ -->
+            <TextBlock Text="Chọn bác sĩ:"
+                       FontWeight="SemiBold"
+                       Foreground="#333"/>
+            <ComboBox x:Name="DoctorComboBox"
+                      DisplayMemberPath="userID.name"
+                      SelectedValuePath="_id"
+                      Height="35"
+                      Margin="0,5,0,15"
+                      Background="White"
+                      BorderBrush="#66B2FF"/>
+
+            <!-- Chọn ngày khám -->
+            <TextBlock Text="Chọn ngày khám:"
+                       FontWeight="SemiBold"
+                       Foreground="#333"/>
+            <DatePicker x:Name="DatePicker"
+                        Height="35"
+                        Margin="0,5,0,20"
+                        BorderBrush="#66B2FF"
+                        Background="White"/>
+
+            <!-- Nút tạo lịch khám -->
+            <Button Content="Tạo lịch khám"
+                    Height="40"
+                    Width="180"
+                    Background="#007BFF"
+                    Foreground="White"
+                    FontWeight="Bold"
+                    BorderThickness="0"
+                    Cursor="Hand"
+                    HorizontalAlignment="Center"
+                    Click="CreateSchedule_Click"/>
+        </StackPanel>
+    </Border>
 </Window>

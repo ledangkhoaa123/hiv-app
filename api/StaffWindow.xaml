@@ -5,13 +5,34 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:api"
         mc:Ignorable="d"
-        Title="StaffWindow" Height="450" Width="800">
-    <Grid>
-        <Button Content="Duyệt lịch khám"
-                Name="btnApprove"
-        Width="150" Height="40"
-        Grid.Row="2" Grid.ColumnSpan="2"
-        HorizontalAlignment="Center" Margin="0,20,0,0"
-        Click="btnApprove_Click"/>
-    </Grid>
+        Title="Quản lý lịch khám"
+        Height="450"
+        Width="800"
+        WindowStartupLocation="CenterScreen"
+        Background="#F0FAFF">
+
+    <Border CornerRadius="10" Padding="20" Background="White" Margin="20" BorderBrush="#CCE7FF" BorderThickness="1">
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+
+            <!-- Tiêu đề -->
+            <TextBlock Text="Quản lý lịch khám - Nhân viên y tế"
+                       FontSize="22"
+                       FontWeight="Bold"
+                       Foreground="#007ACC"
+                       HorizontalAlignment="Center"
+                       Margin="0,0,0,30"/>
+
+            <!-- Nút duyệt -->
+            <Button Content="Duyệt lịch khám"
+                    Name="btnApprove"
+                    Width="180"
+                    Height="45"
+                    Background="#007BFF"
+                    Foreground="White"
+                    FontWeight="SemiBold"
+                    BorderThickness="0"
+                    Cursor="Hand"
+                    Click="btnApprove_Click"/>
+        </StackPanel>
+    </Border>
 </Window>
