@@ -1,0 +1,42 @@
+﻿<Window x:Class="api.DoctorWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:api"
+        mc:Ignorable="d"
+        Title="DoctorWindow" Height="450" Width="800">
+    <Grid Margin="20">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Avatar -->
+        <Image x:Name="AvatarImage" Width="180" Height="180" Grid.Row="0" Grid.Column="0" Margin="0,0,10,10" />
+
+        <!-- Doctor info -->
+        <StackPanel Grid.Row="0" Grid.Column="1" Margin="10,0">
+            <TextBlock x:Name="NameText" FontSize="18" FontWeight="Bold"/>
+            <TextBlock x:Name="EmailText"/>
+            <TextBlock x:Name="PhoneText"/>
+            <TextBlock x:Name="RoomText"/>
+            <TextBlock x:Name="SpecializationText"/>
+            <TextBlock x:Name="DegreeText"/>
+            <TextBlock Text="Kinh nghiệm:" FontWeight="Bold" Margin="0,10,0,0"/>
+            <ItemsControl x:Name="ExperienceList" />
+        </StackPanel>
+
+        <!-- Button -->
+        <Button Content="Xem lịch làm việc"
+                Width="150" Height="40"
+                Grid.Row="2" Grid.ColumnSpan="2"
+                HorizontalAlignment="Center" Margin="0,20,0,0"
+                Click="CreateSchedule_Click"/>
+    </Grid>
+</Window>

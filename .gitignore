@@ -1,0 +1,11 @@
+# Ignore Visual Studio
+.vs/
+*.user
+*.suo
+
+# Ignore build outputs
+bin/
+obj/
+
+# Others
+*.log

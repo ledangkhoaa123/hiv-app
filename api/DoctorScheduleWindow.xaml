@@ -1,0 +1,41 @@
+﻿<Window x:Class="api.DoctorScheduleWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:api"
+        mc:Ignorable="d"
+        Title="DoctorScheduleWindow" Height="450" Width="800">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header and date navigation -->
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10">
+            <Button Content="← Tuần trước" Width="100" Margin="5" Click="PreviousWeek_Click"/>
+            <TextBlock x:Name="WeekLabel" VerticalAlignment="Center" FontWeight="Bold" FontSize="16"/>
+            <Button Content="Tuần sau →" Width="100" Margin="5" Click="NextWeek_Click"/>
+        </StackPanel>
+
+        <!-- List of schedules -->
+        <ListBox x:Name="ScheduleList" Grid.Row="1" Margin="0,0,0,10" SelectionChanged="ScheduleList_SelectionChanged"/>
+
+        <!-- Shift selection and confirm -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,5">
+            <TextBlock Text="Ca: " VerticalAlignment="Center"/>
+            <ComboBox x:Name="ShiftComboBox" Width="120" Margin="5" SelectedIndex="0">
+                <ComboBoxItem Content="morning"/>
+                <ComboBoxItem Content="afternoon"/>
+                <ComboBoxItem Content="full"/>
+            </ComboBox>
+            <Button x:Name="ConfirmButton" Content="Xác nhận lịch" Width="150" Click="ConfirmButton_Click" IsEnabled="False"/>
+        </StackPanel>
+
+        <!-- Status -->
+        <TextBlock x:Name="StatusText" Grid.Row="3" Foreground="DarkGreen" FontStyle="Italic" Margin="0,10,0,0"/>
+    </Grid>
+</Window>
